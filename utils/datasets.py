@@ -259,11 +259,15 @@ class LoadStreams:  # multiple IP or RTSP cameras
         self.mode = 'images'
         self.img_size = img_size
 
-        if os.path.isfile(sources):
-            with open(sources, 'r') as f:
-                sources = [x.strip() for x in f.read().splitlines() if len(x.strip())]
-        else:
-            sources = [sources]
+        # if os.path.isfile(sources):
+        #     with open(sources, 'r') as f:
+        #         sources = [x.strip() for x in f.read().splitlines() if len(x.strip())]
+
+        # elif not isinstance(sources, list):
+        if not isinstance(sources, list):
+            raise ValueError("sources should be a list of video sources")
+        # else:
+        #     sources = [sources]
 
         n = len(sources)
         self.imgs = [None] * n
